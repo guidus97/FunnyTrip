@@ -13,7 +13,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String userName;
+	private String username;
 	private String password;
 	private String name;
 	private String lastName;
@@ -29,7 +29,7 @@ public class User {
 			String roles) {
 		super();
 		this.id = id;
-		this.userName = userName;
+		this.username = userName;
 		this.password = password;
 		this.name = name;
 		this.lastName = lastName;
@@ -47,11 +47,11 @@ public class User {
 	}
 
 	public String getUserName() {
-		return userName;
+		return username;
 	}
 
 	public void setUserName(String userName) {
-		this.userName = userName;
+		this.username = userName;
 	}
 
 	public String getPassword() {
