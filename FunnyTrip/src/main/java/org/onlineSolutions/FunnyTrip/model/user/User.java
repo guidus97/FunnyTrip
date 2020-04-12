@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "User")
+@Table(name = "\"User\"")
 public class User {
 
 	@Id
@@ -20,7 +20,7 @@ public class User {
 	private String email;
 	private boolean active;
 	private String roles;
-
+	
 	public User() {
 	
 	}
