@@ -1,5 +1,7 @@
 package org.onlineSolutions.FunnyTrip.service.userDetailService;
 
+import org.onlineSolutions.FunnyTrip.config.security.CustomUserDetails;
+import org.onlineSolutions.FunnyTrip.model.user.User;
 import org.onlineSolutions.FunnyTrip.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +17,17 @@ public class CustomUserDetailService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return null;
+
+		User user = userRepository.findByUsername(username).orElse(null);
+		
+		if (user != null) {
+			return new CustomUserDetails(user);
+		}
+		
+		else {
+			return null;
+			
+		}
 	}
 
 }
