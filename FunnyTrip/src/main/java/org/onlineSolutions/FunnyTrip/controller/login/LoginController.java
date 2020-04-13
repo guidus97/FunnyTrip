@@ -27,8 +27,7 @@ public class LoginController {
 		try {
 			return ResponseEntity.ok(loginService.login(authRequestBody));
 			
-		}catch (Exception e) {
-			e.printStackTrace();
+		}catch (AuthenticationException e) {
 			throw new BadCredentialsException("Username or password not valid");
 		}
 	}
