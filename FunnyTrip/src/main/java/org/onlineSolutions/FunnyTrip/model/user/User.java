@@ -6,19 +6,38 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "\"User\"")
+@ApiModel(description = "Describe User model")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@ApiModelProperty(notes = "The id of the user")
 	private int id;
+	
+	@ApiModelProperty(notes = "The username used for login")
 	private String username;
+	
+	@ApiModelProperty(notes = "The password used for login")
 	private String password;
+	
+	@ApiModelProperty(notes = "The firstname of the user")
 	private String name;
+	
+	@ApiModelProperty(notes = "The lastname of the user")
 	private String lastName;
+	
+	@ApiModelProperty(notes = "The email of the user")
 	private String email;
+	
+	@ApiModelProperty(notes = "Specify if the user is active")
 	private boolean active;
+
+	@ApiModelProperty(notes = "Specify the role of the user")
 	private String roles;
 	
 	public User() {

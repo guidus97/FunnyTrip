@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
@@ -30,9 +31,10 @@ public class RegisterController {
 	@ApiOperation(value = "Add a user to the database", response = ResponseEntity.class, protocols = "HTTP", produces = "application/json")
 	@ApiResponses(value = {
 			@ApiResponse(code = 201, message = "User created"),
-			@ApiResponse(code = 500, message = "Failed to register the user")
+			@ApiResponse(code = 500, message = "Failed to register the user"),
+			@ApiResponse(code = 403, message = "Access forbidden to this path")
 	})
-	public ResponseEntity<User> registerUser(@RequestBody User user) {
+	public ResponseEntity<User> registerUser(@ApiParam(value = "User to register", required = true) @RequestBody User user) {
 		
 		User user2 = this.i_RegistrationService.registerUser(user);
 		
