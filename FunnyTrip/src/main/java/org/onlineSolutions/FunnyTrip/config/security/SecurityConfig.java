@@ -35,9 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.cors().and().csrf().disable();
 		
 		http.authorizeRequests()
-			.antMatchers("/**/signIn/*", "/api/auth/login", "/api/auth/register", "/login").permitAll()
+			.antMatchers("/**/signIn/*", "/api/auth/login", "/api/auth/registerUser", "/login", "/swagger-ui").permitAll()
 			.antMatchers("/api/user/services/**").hasRole("USER")
 			.antMatchers("/api/admin/services/**").hasRole("ADMIN")
+			.antMatchers("/api/account/**").hasAnyRole("USER", "ADMIN")
+			.antMatchers("/api/admin/privileges/**").hasRole("ADMIN")
 			.anyRequest().authenticated()
 			.and().apply(new JwtConfigurer(jwtTokenProvider));
 		
@@ -49,7 +51,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 		web.ignoring().antMatchers("/*/")
         .antMatchers("/eureka/**")
-        .antMatchers(HttpMethod.OPTIONS, "/**");
+        .antMatchers(HttpMethod.OPTIONS, "/**")
+        .antMatchers("/swagger-ui.html")
+        .antMatchers("/swagger-resources/**")
+        .antMatchers("/webjars/**")
+        .antMatchers("/v2/api-docs");
 	}
 	
 	@Bean
