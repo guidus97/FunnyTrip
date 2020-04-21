@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.onlineSolutions.FunnyTrip.config.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,7 +38,7 @@ public class LoginControllerTest {
 		
 		JSONObject jsonRequest = new JSONObject();
 		
-		jsonRequest.put("username", "luchino");
+		jsonRequest.put("username", "micky");
 		jsonRequest.put("password", "pass");
 		
 		mockMvc.perform(post("/api/auth/login")
