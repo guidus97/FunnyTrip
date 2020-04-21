@@ -36,9 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http.authorizeRequests()
 			.antMatchers("/**/signIn/*", "/api/auth/login", "/api/auth/registerUser", "/login", "/swagger-ui").permitAll()
-			.antMatchers("/api/user/services/**").hasRole("USER")
-			.antMatchers("/api/admin/services/**").hasRole("ADMIN")
-			.antMatchers("/api/account/**").hasAnyRole("USER", "ADMIN")
+			.antMatchers("/api/user/services/**").hasAuthority("ROLE_USER")
+			.antMatchers("/api/admin/services/**").hasAuthority("ROLE_ADMIN")
+			.antMatchers("/api/account/**").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
 			.antMatchers("/api/admin/privileges/**").hasRole("ADMIN")
 			.anyRequest().authenticated()
 			.and().apply(new JwtConfigurer(jwtTokenProvider));
