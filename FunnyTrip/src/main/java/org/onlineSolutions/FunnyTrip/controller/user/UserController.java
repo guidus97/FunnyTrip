@@ -30,7 +30,7 @@ public class UserController {
 	@Autowired
 	private I_UserService i_UserService;
 	
-	@RequestMapping(value = "/account/modifyUser/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
+	@RequestMapping(value = "/account/modifyUserById/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
 	@ApiOperation(value = "Modify the user by id", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, httpMethod = "PUT")
 	@ApiResponses({
 	
@@ -45,7 +45,7 @@ public class UserController {
 		return new ResponseEntity<User>(i_UserService.updateUserById(user, id), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/account/modifyUser/{email}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
+	@RequestMapping(value = "/account/modifyUserByEmail/{email}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
 	@ApiOperation(value = "Modify the user by email", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, httpMethod = "PUT")
 	@ApiResponses({
 	
@@ -60,7 +60,7 @@ public class UserController {
 		return new ResponseEntity<User>(i_UserService.updateUserByEmail(user, email), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/account/modifyUser/{username}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
+	@RequestMapping(value = "/account/modifyUserByUsername/{username}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
 	@ApiOperation(value = "Modify the user by username", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, httpMethod = "PUT")
 	@ApiResponses({
 	
@@ -75,7 +75,7 @@ public class UserController {
 		return new ResponseEntity<User>(i_UserService.updateUserByUsername(user, username), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/account/getUser/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	@RequestMapping(value = "/account/getUserById/{id}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
 	@ApiOperation(value = "Give the user by id", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, httpMethod = "GET")
 	@ApiResponses({
 	
@@ -90,7 +90,7 @@ public class UserController {
 		return new ResponseEntity<User>(i_UserService.getUserById(id), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/account/getUser/{email}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	@RequestMapping(value = "/account/getUserByEmail/{email}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
 	@ApiOperation(value = "Give the user by email", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, httpMethod = "GET")
 	@ApiResponses({
 	
@@ -105,7 +105,7 @@ public class UserController {
 		return new ResponseEntity<User>(i_UserService.getUserByEmail(email), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/account/getUser/{username}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+	@RequestMapping(value = "/account/getUserByUsername/{username}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
 	@ApiOperation(value = "Give the user by username", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, httpMethod = "GET")
 	@ApiResponses({
 	
@@ -133,7 +133,7 @@ public class UserController {
 		
 		return new ResponseEntity<List<User>>(i_UserService.getAll(), HttpStatus.OK);
 	}
-	@RequestMapping(value = "/account/deleteUser/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
+	@RequestMapping(value = "/account/deleteUserById/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
 	@ApiOperation(value = "Delete the user by id", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, httpMethod = "DELETE")
 	@ApiResponses({
 	
@@ -150,7 +150,7 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/account/deleteUser/{email}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
+	@RequestMapping(value = "/account/deleteUserByEmail/{email}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
 	@ApiOperation(value = "Delete the user by email", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, httpMethod = "DELETE")
 	@ApiResponses({
 	
@@ -167,7 +167,7 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/account/deleteUser/{username}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
+	@RequestMapping(value = "/account/deleteUserByUsername/{username}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.DELETE)
 	@ApiOperation(value = "Delete the user by username", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, httpMethod = "DELETE")
 	@ApiResponses({
 	
