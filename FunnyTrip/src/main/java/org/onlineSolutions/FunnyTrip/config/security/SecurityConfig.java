@@ -42,9 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.antMatchers("/api/admin/privileges/**").hasRole("ADMIN")
 			.anyRequest().authenticated()
 			.and().apply(new JwtConfigurer(jwtTokenProvider));
-		
-		http.exceptionHandling().accessDeniedPage("/login");
-	}
+		}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
