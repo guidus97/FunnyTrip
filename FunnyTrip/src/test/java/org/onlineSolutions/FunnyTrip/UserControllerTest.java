@@ -169,5 +169,68 @@ public class UserControllerTest {
 		.andExpect(status().isNotFound())
 		.andDo(print());
 	}
+	
+	@Test
+	public void getUserByEmailOk() throws Exception {
+		
+		User user = new User(2,"micky", "$2a$10$vaMOlPqv6dCK98HX3fmz9uD2mRwxqAV0dUcMBBjJSKW4X4TsN7na.","Michele","Andrungo","admin@tiscali.it",true,"ADMIN");
+		ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		JSONObject jsonObject = new JSONObject(objectWriter.writeValueAsString(user));
+		
+		mock.perform(get("/api/account/getUserByEmail/admin@tiscali.it")
+				.header("Authorization", "Bearer " + this.jwtToken))
+		.andExpect(status().isOk())
+		.andExpect(content().json(jsonObject.toString()))
+		.andDo(print());
+	}
+	
+	@Test
+	public void getUserByEmailUnauthorized() throws Exception {
+		
+		mock.perform(get("/api/account/getUserByEmail/admin@tiscali.it"))
+		.andExpect(status().isUnauthorized())
+		.andDo(print());
+	}
+	
+	@Test
+	public void getUserByEmailNotFound() throws Exception {
+		
+		mock.perform(get("/api/account/getUserByEmail/no@noscali.it")
+				.header("Authorization", "Bearer " + this.jwtToken))
+		.andExpect(status().isNotFound())
+		.andDo(print());
+	}
+	
+	@Test
+	public void getUserByUsernameOk() throws Exception {
+		
+		User user = new User(2,"micky", "$2a$10$vaMOlPqv6dCK98HX3fmz9uD2mRwxqAV0dUcMBBjJSKW4X4TsN7na.","Michele","Andrungo","admin@tiscali.it",true,"ADMIN");
+		ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+		JSONObject jsonObject = new JSONObject(objectWriter.writeValueAsString(user));
+		
+		mock.perform(get("/api/account/getUserByUsername/micky")
+				.header("Authorization", "Bearer " + this.jwtToken))
+		.andExpect(status().isOk())
+		.andExpect(content().json(jsonObject.toString()))
+		.andDo(print());
+	}
+	
+	@Test
+	public void getUserByUsernameUnauthorized() throws Exception {
+		
+		mock.perform(get("/api/account/getUserByUsername/micky"))
+		.andExpect(status().isUnauthorized())
+		.andDo(print());
+	}
+	
+	@Test
+	public void getUserByUsernameNotFound() throws Exception {
+		
+		mock.perform(get("/api/account/getUserByUsername/zicky")
+				.header("Authorization", "Bearer " + this.jwtToken))
+		.andExpect(status().isNotFound())
+		.andDo(print());
+	}
+	
 
 }
