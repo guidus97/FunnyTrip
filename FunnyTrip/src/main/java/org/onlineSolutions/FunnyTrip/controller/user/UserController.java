@@ -85,7 +85,7 @@ public class UserController {
 		@ApiResponse(code = 401, message = "User unauthorized"),
 		@ApiResponse(code = 500, message = "Give failed due to server error")
 	})
-	public ResponseEntity<User> getUserById(@ApiParam(value = "The user to give", required = true) @RequestBody User user, @PathVariable("id") int id) {
+	public ResponseEntity<User> getUserById(@PathVariable("id") int id) {
 		
 		return new ResponseEntity<User>(i_UserService.getUserById(id), HttpStatus.OK);
 	}
@@ -100,7 +100,7 @@ public class UserController {
 		@ApiResponse(code = 401, message = "User unauthorized"),
 		@ApiResponse(code = 500, message = "Give failed due to server error")
 	})
-	public ResponseEntity<User> getUserByEmail(@ApiParam(value = "The user to give", required = true) @RequestBody User user, @PathVariable("email") String email) {
+	public ResponseEntity<User> getUserByEmail(@PathVariable("email") String email) {
 		
 		return new ResponseEntity<User>(i_UserService.getUserByEmail(email), HttpStatus.OK);
 	}
@@ -115,7 +115,7 @@ public class UserController {
 		@ApiResponse(code = 401, message = "User unauthorized"),
 		@ApiResponse(code = 500, message = "Give failed due to server error")
 	})
-	public ResponseEntity<User> getUserByUsername(@ApiParam(value = "The user to give", required = true) @RequestBody User user, @PathVariable("username") String username) {
+	public ResponseEntity<User> getUserByUsername(@PathVariable("username") String username) {
 		
 		return new ResponseEntity<User>(i_UserService.getUserByUsername(username), HttpStatus.OK);
 	}
