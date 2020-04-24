@@ -10,10 +10,13 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
+
 @SpringBootApplication
 @EnableZuulProxy
 @EnableEurekaServer
 @EnableCaching
+@EnableEncryptableProperties
 @EnableJpaRepositories(basePackageClasses = UserRepository.class)
 public class FunnyTripApplication extends SpringBootServletInitializer {
 
