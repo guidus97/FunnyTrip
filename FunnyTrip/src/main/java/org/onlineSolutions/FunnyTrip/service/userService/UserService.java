@@ -7,7 +7,6 @@ import org.onlineSolutions.FunnyTrip.exceptions.UserNotFoundException;
 import org.onlineSolutions.FunnyTrip.model.user.User;
 import org.onlineSolutions.FunnyTrip.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
