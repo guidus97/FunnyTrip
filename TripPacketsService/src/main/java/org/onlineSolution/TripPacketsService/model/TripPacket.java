@@ -10,6 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class TripPacket implements Serializable {
@@ -20,8 +24,15 @@ public class TripPacket implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
+	
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date start;
+	
+	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern = "dd-MM-yyyy")
 	private Date end_trip;
+	
 	private float price;
 	
 	@OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
@@ -88,7 +99,10 @@ public class TripPacket implements Serializable {
 		this.optional = optional;
 	}
 	
-	
+	public void addOptional(Optional optional) {
+		
+		this.optional.add(optional);
+	}
 	
 	
 }
