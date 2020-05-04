@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
+import org.onlineSolutions.FunnyTrip.exceptions.TokenException;
 import org.onlineSolutions.FunnyTrip.service.userDetailService.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -76,7 +77,7 @@ public class JwtTokenProvider {
 			}
 			return true;
 		} catch (JwtException | IllegalArgumentException e) {
-			throw new JwtException("Expired or invalid JWT token");
+			throw new TokenException("Expired or invalid JWT token");
 		}
 	}
 }
