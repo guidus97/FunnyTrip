@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Board extends Optional implements Serializable{
@@ -27,6 +29,15 @@ public class Board extends Optional implements Serializable{
 
 	public void setPrice(float price) {
 		this.price = price;
+	}
+	
+	@JsonIgnore
+	public TripPacket getPacket() {
+		return super.trip;
+	}
+	
+	public void setPacket(TripPacket packet) {
+		super.trip = packet;
 	}
 	
 	
