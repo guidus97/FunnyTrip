@@ -13,6 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -36,6 +39,7 @@ public class TripPacket implements Serializable {
 	private float price;
 	
 	@OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
+	@Fetch(FetchMode.JOIN)
 	private List<Optional> optional;
 
 	public TripPacket(int id, String name, Date start, Date end, float price) {
