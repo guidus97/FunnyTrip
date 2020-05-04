@@ -19,6 +19,9 @@ public interface TripPacketRepository extends CrudRepository<TripPacket, Integer
 	@Query(value = "select tp.id, tp.\"name\", tp.\"start\", tp.end_trip, tp.price from public.trip_packet tp\r\n" + 
 			"INNER join purchase on tp.id = purchase.trip_pack_id\r\n" + 
 			"INNER join \"user\" on purchase.user_id = \"user\".id\r\n" + 
-			"where \"user\".username = :username", nativeQuery = true)
-	List<TripPacket> getTripPacketsForSpecificUser(@Param("username") int user_id);
+			"where \"user\".id = :id", nativeQuery = true)
+	List<TripPacket> getTripPacketsForSpecificUser(@Param("id") int user_id);
+	
+	@Query(value = "select * from public.trip_packet", nativeQuery = true)
+	List<TripPacket> getAll();
 }

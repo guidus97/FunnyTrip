@@ -3,10 +3,15 @@ package org.onlineSolution.TripPacketsService.service;
 import java.util.List;
 
 import org.onlineSolution.TripPacketsService.exception.TripPacketNotFound;
+import org.onlineSolution.TripPacketsService.model.Board;
 import org.onlineSolution.TripPacketsService.model.Optional;
+import org.onlineSolution.TripPacketsService.model.Room;
 import org.onlineSolution.TripPacketsService.model.TripPacket;
 import org.onlineSolution.TripPacketsService.repository.TripPacketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -22,16 +27,19 @@ public class TripPacketService implements I_TripPacketService {
 	private RestTemplate restclient;
 
 	@Override
+	@CachePut(value = "trip")
 	public TripPacket addPacket(TripPacket packet) {
 		return packetRepository.save(packet);
 	}
 
 	@Override
+	@Cacheable(value = "trip", key = "#id")
 	public TripPacket getById(int id) {
-		return packetRepository.findById(id).orElse(null);
+		return packetRepository.findById(id).orElseThrow(() -> new TripPacketNotFound("Packet not found"));
 	}
 
 	@Override
+	@CachePut(value = "trip", key = "#id")
 	public TripPacket updateById(TripPacket packet, int id) {
 		
 		TripPacket packet_to_update = packetRepository.findById(id).orElseThrow(() -> new TripPacketNotFound("Packet not found"));
@@ -45,30 +53,55 @@ public class TripPacketService implements I_TripPacketService {
 	}
 
 	@Override
+	@CacheEvict(value = "trip", key = "#id")
 	public void deletePacket(int id) {
 		packetRepository.deleteById(id);
 	}
+	
+	@Override
+	@Cacheable(value = "trip")
+	public List<TripPacket> getAll(){
+		
+		return packetRepository.getAll();
+	}
 
 	@Override
-	public Optional addOptionalToTripPacket(Optional optional, int id) {
+	@CachePut(value = "trip", key = "#id")
+	public Optional addOptionalToTripPacket(Optional optional, int id) throws Exception {
 		
 		TripPacket packet = packetRepository.findById(id).orElseThrow(() -> new TripPacketNotFound("Packet not found"));
+		
+		if (optional instanceof Room) {
+			((Room) optional).setPacket(packet);
+		}
+		
+		else if (optional instanceof Board) {
+			((Board) optional).setPacket(packet);
+		}
+		
+		else {
+			throw new Exception("Bad credentials");
+		}
 		
 		packet.addOptional(optional);
 		
 		return optional;
 	}
 	
+	@Override
+	@Cacheable(value = "trip")
 	public List<Object> getAllOptionals(){
 		return null;
 	}
 
 	@Override
+	@Cacheable(value = "trip")
 	public List<TripPacket> getAllTripPacketsForAllUsers() {
 		return packetRepository.getTripPacketsForAllUsers();
 	}
 
 	@Override
+	@Cacheable(value = "trip", key = "#user_id")
 	public List<TripPacket> getAllTripPacketsByUserId(int user_id) {
 		return packetRepository.getTripPacketsForSpecificUser(user_id);
 	}

@@ -12,8 +12,9 @@ public interface I_TripPacketService {
 	TripPacket updateById(TripPacket packet, int id);
 	void deletePacket(int id);
 	
-	Optional addOptionalToTripPacket(Optional optional, int id);
+	Optional addOptionalToTripPacket(Optional optional, int id) throws Exception;
 	
+	List<TripPacket> getAll();
 	List<TripPacket> getAllTripPacketsForAllUsers();
 	List<TripPacket> getAllTripPacketsByUserId(int user_id);
 	
