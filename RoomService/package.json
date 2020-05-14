@@ -1,0 +1,23 @@
+{
+  "name": "roomservice",
+  "version": "1.0.0",
+  "description": "Room service of FunnyTrip application",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon main/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Guido",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "kafka-node": "^5.0.0",
+    "mongodb": "^3.5.7",
+    "nodemon": "^2.0.3"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.1.2"
+  }
+}
