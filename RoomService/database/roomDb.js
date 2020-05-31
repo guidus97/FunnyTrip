@@ -1,5 +1,5 @@
 const Mongo = require('../factory/mongoFactory.js')
-const url = 'mongodb://guidus97:NoSQLIsTheBest@192.168.1.15:27017'
+const url = 'mongodb://guidus97:mongoAdmin@192.168.1.69:27017'
 const dbName = 'RoomService'
 const Room = require('../model/room.js')
 
@@ -104,14 +104,11 @@ class RoomRepository {
                     throw err
                 }
 
-                database.close()
                 console.log('Returning a room');
 
                 instance = new Room(res.id, res.name, res.location, res.city, res.price)
                 console.log('Instance is: ' + instance)
             })
-
-            database.close()
         })
 
         return instance
