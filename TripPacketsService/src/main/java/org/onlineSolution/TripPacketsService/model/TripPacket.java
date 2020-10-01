@@ -107,6 +107,13 @@ public class TripPacket implements Serializable {
 		
 		this.optional.add(optional);
 	}
+
+	@Override
+	public String toString() {
+		return "TripPacket [id=" + id + ", name=" + name + ", start=" + start + ", end_trip=" + end_trip + ", price="
+				+ price + ", optional=" + optional + "]";
+	}
 	
 	
+
 }
