@@ -24,5 +24,9 @@ public class CatalogService {
 
 		System.out.println("Received message: " + string);
 	}
+	
+	public TripPacket getById(int id) {
+		return repository.findById(id).orElse(null);
+	}
 
 }
