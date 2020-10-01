@@ -17,7 +17,7 @@ public class RegistrationService implements I_RegistrationService {
 	private BCryptPasswordEncoder bcrypt;
 	
 	@Override
-	@CachePut(value = "users_list", key = "#user")
+	@CachePut(value = "users_list", key = "#user.id")
 	public User registerUser(User user) {
 		
 		user.setPassword(bcrypt.encode(user.getPassword()));
