@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -25,11 +26,22 @@ public class TripPacketService implements I_TripPacketService {
 	
 	@Autowired
 	private RestTemplate restclient;
+	
+	@Autowired
+	private KafkaTemplate<String, TripPacket> kafka;
+	
+	private static final String TOPIC_ADD = "CatalogService";
+	private static final String TOPIC_DELETE = "CatalogServiceDelete";
 
 	@Override
-	@CachePut(value = "trip")
+	@CachePut(value = "trip", key = "#packet.id")
 	public TripPacket addPacket(TripPacket packet) {
-		return packetRepository.save(packet);
+		
+		TripPacket pack = packetRepository.save(packet);
+		
+		kafka.send(TOPIC_ADD, pack);
+		
+		return pack;
 	}
 
 	@Override
@@ -66,7 +78,7 @@ public class TripPacketService implements I_TripPacketService {
 	}
 
 	@Override
-	@CachePut(value = "trip", key = "#id")
+	@CachePut(value = "trip", key = "#optional.id")
 	public Optional addOptionalToTripPacket(Optional optional, int id) throws Exception {
 		
 		TripPacket packet = packetRepository.findById(id).orElseThrow(() -> new TripPacketNotFound("Packet not found"));
